@@ -12,6 +12,7 @@ import com.example.notetaking.model.succeeded
 import com.example.notetaking.repo.local.entity.NoteEntity
 import com.example.notetaking.repo.local.entity.NoteNotFoundException
 import com.google.common.truth.ExpectFailure
+import com.google.common.truth.Truth
 import junit.framework.TestCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -83,7 +84,7 @@ class DefaultNoteLocalDataSourceTest : TestCase() {
         //WHEN - Note retrieved by ID
         val result = dataSource.getNote(newNote.id)
         //THEN - Same note is returned
-        assertThat(result.succeeded, `is`(true))
+        Truth.assertThat(result).isInstanceOf(Result.Success::class.java)
         val savedNote = result as Result.Success
         assertThat(savedNote.data.title, `is`(title))
         assertThat(savedNote.data.content, `is`(content))
@@ -100,9 +101,9 @@ class DefaultNoteLocalDataSourceTest : TestCase() {
         //WHEN - retrieving deleted note
         val result = dataSource.getNote(newNote.id)
         //THEN - Note not found exception is expected
-        assertThat(result is Result.Error, `is`(true))
+        Truth.assertThat(result).isInstanceOf(Result.Error::class.java)
         val error = result as Result.Error
-        assertThat(error.e is NoteNotFoundException, `is`(true))
+        Truth.assertThat(error.e).isInstanceOf(NoteNotFoundException::class.java)
     }
 
 
