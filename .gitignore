@@ -1,6 +1,9 @@
 *.iml
 .gradle
 .idea/vcs.xml
+.idea/markdown-navigator.xml
+.idea/codeStyles/Project.xml
+.idea/gradle.xml
 /local.properties
 /.idea/caches
 /.idea/libraries
