@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.SavedStateHandle
 import com.example.notetaking.MainCoroutineRule
+import com.example.notetaking.R
 import com.example.notetaking.getOrAwaitValue
 import com.example.notetaking.mapper.NoteEntityToNoteMapper
 import com.example.notetaking.observeForTesting
@@ -32,18 +33,19 @@ class NoteListViewModelTest {
     //Subject under test
     lateinit var viewModel: NoteListViewModel
     lateinit var noteRep: NoteRepo
+    lateinit var fakeLocalRepo: FakeNoteLocalDataSource
 
 
     @ExperimentalCoroutinesApi
     @get:Rule
-    val instantRuleExecution=InstantTaskExecutorRule()
+    val instantRuleExecution = InstantTaskExecutorRule()
 
     @get:Rule
-    var mainCoroutinesRule=MainCoroutineRule()
+    var mainCoroutinesRule = MainCoroutineRule()
 
     @Before
     fun setup() {
-        val fakeLocalRepo = FakeNoteLocalDataSource()
+        fakeLocalRepo = FakeNoteLocalDataSource()
         val fakeNotes = mutableListOf<NoteEntity>()
         fakeNotes.add(NoteEntity(title = "title", content = "content"))
         fakeNotes.add(NoteEntity(title = "title", content = "content"))
@@ -79,5 +81,27 @@ class NoteListViewModelTest {
         }
     }
 
+
+    @Test
+    fun loadNotes_error() {
+        fakeLocalRepo.setReturnError(true)
+
+        viewModel.loadNotes()
+
+        viewModel.notes.observeForTesting {
+
+            //loading state should be false
+            assertFalse(viewModel.isLoading.getOrAwaitValue())
+
+            //No note should be emitted
+            assertEquals(viewModel.notes.getOrAwaitValue().size, 0)
+
+            assertEquals(
+                viewModel.error.getOrAwaitValue().getContentIfNotHandled(),
+                R.string.msg_error_no_item_has_been_found
+            )
+
+        }
+    }
 
 }
