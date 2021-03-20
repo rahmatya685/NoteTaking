@@ -32,4 +32,8 @@ class DefaultNoteRepo(
             }
         }
 
+    override suspend fun saveNote(note: Note) {
+        noteLocalDataSource.saveNote(mapper.to(note))
+    }
+
 }

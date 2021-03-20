@@ -1,7 +1,8 @@
-package com.example.notetaking.repo.local
+package com.example.repo.local
 
 import androidx.annotation.VisibleForTesting
 import com.example.notetaking.model.Result
+import com.example.notetaking.repo.local.NoteLocalDataSource
 import com.example.notetaking.repo.local.entity.NoteEntity
 import com.example.notetaking.repo.local.entity.NoteNotFoundException
 import kotlinx.coroutines.flow.Flow

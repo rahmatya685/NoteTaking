@@ -9,4 +9,5 @@ import com.example.notetaking.model.Result
  */
 interface NoteRepo {
     fun observeNotes(): LiveData<Result<List<Note>>>
+    suspend fun saveNote(note: Note)
 }

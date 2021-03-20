@@ -5,6 +5,7 @@ import com.example.notetaking.repo.local.entity.NoteEntity
 import com.example.notetaking.repo.local.entity.NoteNotFoundException
 import com.example.notetaking.repo.local.entity.dao.NoteDao
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
@@ -17,7 +18,7 @@ import kotlinx.coroutines.withContext
  */
 class DefaultNoteLocalDataSource(
     private val noteDao: NoteDao,
-    private val dispatcher: CoroutineDispatcher
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : NoteLocalDataSource {
 
     override fun observeNotes(): Flow<Result<List<NoteEntity>>> {

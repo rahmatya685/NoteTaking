@@ -6,10 +6,43 @@
     android:layout_height="match_parent"
     tools:context=".note_list.NoteListFragment">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_notes"
+    <FrameLayout
+        android:id="@+id/data_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_notes"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </FrameLayout>
+
+    <RelativeLayout
+        android:id="@+id/no_data_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/img_not_found"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="30dp"
+            android:src="@drawable/ic_baseline_notes_24" />
+
+        <TextView
+            android:id="@+id/tv_not_found"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/img_not_found"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/msg_error_no_item_has_been_found"
+            android:textAlignment="center" />
+    </RelativeLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_add"

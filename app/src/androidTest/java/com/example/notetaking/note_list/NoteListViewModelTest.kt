@@ -3,8 +3,6 @@
 package com.example.notetaking.note_list
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.SavedStateHandle
 import com.example.notetaking.MainCoroutineRule
 import com.example.notetaking.R
@@ -13,18 +11,13 @@ import com.example.notetaking.mapper.NoteEntityToNoteMapper
 import com.example.notetaking.observeForTesting
 import com.example.notetaking.repo.DefaultNoteRepo
 import com.example.notetaking.repo.NoteRepo
-import com.example.notetaking.repo.local.FakeNoteLocalDataSource
 import com.example.notetaking.repo.local.entity.NoteEntity
 import junit.framework.Assert.*
-import junit.framework.TestCase
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import java.util.concurrent.CountDownLatch
-import java.util.concurrent.TimeUnit
-import java.util.concurrent.TimeoutException
+import com.example.repo.local.FakeNoteLocalDataSource
 
 
 @ExperimentalCoroutinesApi

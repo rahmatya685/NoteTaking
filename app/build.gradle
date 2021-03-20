@@ -36,9 +36,22 @@ android {
     buildFeatures {
         viewBinding = true
     }
+    dataBinding {
+        enabled = true
+        enabledForTests = true
+    }
     testOptions {
         unitTests {
             includeAndroidResources = true
+        }
+    }
+    sourceSets {
+        test {
+            java.srcDirs += "$projectDir/src/testShared"
+        }
+
+        androidTest {
+            java.srcDirs += "$projectDir/src/testShared"
         }
     }
 }
@@ -68,7 +81,6 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$archLifecycleVersion"
     implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
-
 
 
     // Dependencies for local unit tests
