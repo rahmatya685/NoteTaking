@@ -40,6 +40,7 @@ fun <T> LiveData<T>.getOrAwaitValue(
     } finally {
         this.removeObserver(observer)
     }
+    @Suppress("UNCHECKED_CAST")
     return data as T
 }
 

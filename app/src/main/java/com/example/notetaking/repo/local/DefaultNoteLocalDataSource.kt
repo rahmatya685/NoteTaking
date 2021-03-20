@@ -21,8 +21,11 @@ class DefaultNoteLocalDataSource(
 ) : NoteLocalDataSource {
 
     override fun observeNotes(): Flow<Result<List<NoteEntity>>> {
-       return noteDao.observeNotes().map {
-            Result.Success()
+        return noteDao.observeNotes().map {
+            if (it.isEmpty())
+                Result.Error(NoteNotFoundException())
+            else
+                Result.Success(it)
         }
     }
 
@@ -37,13 +40,14 @@ class DefaultNoteLocalDataSource(
             if (this == null)
                 Result.Error(NoteNotFoundException())
             else
-                Result.Success()
+                Result.Success(this)
         }
     }
 
-    override suspend fun deleteNote(note: NoteEntity) = withContext(dispatcher) {
-        noteDao.delete(note)
-    }
+    override suspend fun deleteNote(note: NoteEntity) =
+        withContext(dispatcher) {
+            noteDao.delete(note)
+        }
 
 
 }

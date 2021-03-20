@@ -25,7 +25,7 @@ class FakeNoteLocalDataSource : NoteLocalDataSource {
     private fun getTasks(): Result<List<NoteEntity>> {
         if (shouldReturnError)
             return Result.Error(Exception("EmptyList"))
-        return Result.Success()
+        return Result.Success(fakeData.values.toList())
     }
 
     override suspend fun saveNote(newNote: NoteEntity) {
@@ -37,7 +37,7 @@ class FakeNoteLocalDataSource : NoteLocalDataSource {
         if (shouldReturnError)
             return error
         fakeData[id]?.let {
-            return Result.Success()
+            return Result.Success(it)
         }
         return error
     }
