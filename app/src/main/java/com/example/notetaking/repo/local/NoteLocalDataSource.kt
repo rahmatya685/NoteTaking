@@ -8,8 +8,8 @@ import kotlinx.coroutines.flow.Flow
  * Local entry for the notes in db
  */
 interface NoteLocalDataSource {
-    fun observeNotes(): Flow<List<NoteEntity>>
+    fun observeNotes(): Flow<Result<List<NoteEntity>>>
     suspend fun saveNote(newNote: NoteEntity)
-    suspend fun getNote(id: String):Result<NoteEntity>
+    suspend fun getNote(id: String): Result<NoteEntity>
     suspend fun deleteNote(newNote: NoteEntity)
 }

@@ -9,13 +9,13 @@ import java.lang.Exception
 sealed class Result<out I> {
     data class Success<I>(var data: I) : Result<I>()
     data class Error(val e: Exception) : Result<Nothing>()
-    object Loading : Result<String>()
+    data class Loading(val m:String) : Result<String>()
 
     override fun toString(): String {
         return when (this) {
             is Success<*> -> "Success[data=$data]"
             is Error -> "Error[exception=$e]"
-            Loading -> "Loading"
+            is Loading -> "Loading[${this.m}]"
         }
     }
 }
