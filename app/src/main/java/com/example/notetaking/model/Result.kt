@@ -7,7 +7,7 @@ import java.lang.Exception
  * @param <T>
  */
 sealed class Result<out I> {
-    data class Success<I>(var data: I) : Result<I>()
+    data class Success<I>(val data:I) : Result<I>()
     data class Error(val e: Exception) : Result<Nothing>()
     data class Loading(val m:String) : Result<String>()
 

@@ -22,7 +22,7 @@ class DefaultNoteLocalDataSource(
 
     override fun observeNotes(): Flow<Result<List<NoteEntity>>> {
        return noteDao.observeNotes().map {
-            Result.Success(it)
+            Result.Success()
         }
     }
 
@@ -37,7 +37,7 @@ class DefaultNoteLocalDataSource(
             if (this == null)
                 Result.Error(NoteNotFoundException())
             else
-                Result.Success(this)
+                Result.Success()
         }
     }
 

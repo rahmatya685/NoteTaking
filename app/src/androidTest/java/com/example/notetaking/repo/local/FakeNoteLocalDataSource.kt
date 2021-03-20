@@ -1,7 +1,6 @@
 package com.example.notetaking.repo.local
 
 import androidx.annotation.VisibleForTesting
-import com.example.notetaking.model.Note
 import com.example.notetaking.model.Result
 import com.example.notetaking.repo.local.entity.NoteEntity
 import com.example.notetaking.repo.local.entity.NoteNotFoundException
@@ -26,7 +25,7 @@ class FakeNoteLocalDataSource : NoteLocalDataSource {
     private fun getTasks(): Result<List<NoteEntity>> {
         if (shouldReturnError)
             return Result.Error(Exception("EmptyList"))
-        return Result.Success(fakeData.values.toList())
+        return Result.Success()
     }
 
     override suspend fun saveNote(newNote: NoteEntity) {
@@ -38,7 +37,7 @@ class FakeNoteLocalDataSource : NoteLocalDataSource {
         if (shouldReturnError)
             return error
         fakeData[id]?.let {
-            return Result.Success(it)
+            return Result.Success()
         }
         return error
     }
