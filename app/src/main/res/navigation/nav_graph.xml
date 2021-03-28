@@ -17,13 +17,13 @@
 
     <fragment
         android:id="@+id/addNoteFragment"
-        android:name="com.example.notetaking.add_note.AddNoteFragment"
+        android:name="com.example.notetaking.add_note.NoteAddEditFragment"
         android:label="add_note"
         tools:layout="@layout/add_note_fragment">
         <argument
-            android:name="note"
+            android:name="noteId"
             android:defaultValue="@null"
-            app:argType="com.example.notetaking.model.Note"
+            app:argType="string"
             app:nullable="true" />
     </fragment>
 

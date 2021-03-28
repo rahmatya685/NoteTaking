@@ -8,11 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.notetaking.R
 
-class AddNoteFragment : Fragment() {
-
-    companion object {
-        fun newInstance() = AddNoteFragment()
-    }
+class NoteAddEditFragment : Fragment() {
 
     private lateinit var viewModel: AddNoteViewModel
 
@@ -26,7 +22,6 @@ class AddNoteFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(AddNoteViewModel::class.java)
-        // TODO: Use the ViewModel
     }
 
 }
