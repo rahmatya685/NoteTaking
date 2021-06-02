@@ -1,25 +1,28 @@
 language: android
-jdk: oraclejdk8
-env:
-  global:
-    - ANDROID_TARGET=android-30
-    - ANDROID_ABI=armeabi-v7a
+dist: trusty
+sudo: required
+
 android:
   components:
     - tools
     - platform-tools
-    - build-tools-30.0.3
-    - android-30
-    - extra-android-m2repository
-    - $ANDROID_TARGET
-    - sys-img-${ANDROID_ABI}-${ANDROID_TARGET}
-script:
-  - ./gradlew build jacocoTestReport assembleAndroidTest
-  - echo no | android create avd --force -n test -t $ANDROID_TARGET --abi $ANDROID_ABI
-  - emulator -avd test -no-skin -no-audio -no-window &
-  - android-wait-for-emulator
-  - adb shell setprop dalvik.vm.dexopt-flags v=n,o=v
-  - ./gradlew connectedCheck
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
+    - build-tools-29.0.3
+    - android-29
+    - extra
+  licenses:
+    - 'android-sdk-preview-license-52d11cd2'
+    - 'android-sdk-license-.+'
+    - 'google-gdk-license-.+'
 
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+    - $HOME/.android/build-cache
+
+script:
+  - ./gradlew clean assemble
